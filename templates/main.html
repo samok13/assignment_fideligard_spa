@@ -14,8 +14,8 @@
 
         <h3>Stocks</h3>
 
-        <div class="form-group">
-          <label for="filter">Filter</label>
+        <div class="form-group col-xs-4 pull-right">
+          <label for="filter">Search</label>
           <input type="text" class="form-control" ng-model="filter"></input>
         </div>
 
@@ -46,22 +46,25 @@
           <tbody>
             <tr>
               <td>
-                {{ stockData[ dateInfo.getDateString() ].symbol }}
+                {{stockData[dateInfo.getDateString()].symbol}}
               </td>
               <td>
-                {{ stockData[ dateInfo.getDateString() ].price }}
+                {{ stockData[dateInfo.getDateString()].price | currency}}
               </td>
               <td>
-
+                {{stockData[dateInfo.getDateString()].price - 
+                stockData[stockService.getDateString(getPreviousDate(_dataInfo.currentDate))].price | currency}}
               </td>
               <td>
-
+                {{ stockData[dateInfo.getDateString()].price-
+                stockData[stockService.getDateString(getPreviousWeek(_dataInfo.currentDate))].price | currency}}
               </td>
               <td>
-
+                {{stockData[dateInfo.getDateString()].price - 
+                stockData[stockService.getDateString(getPreviousMonth(_dataInfo.currentDate))].price | currency}}
               </td>
               <td>
-                <a href="">trade</a>
+                <a ui-sref="stocks.trading">trade</a>
               </td>
             </tr>
           </tbody>
